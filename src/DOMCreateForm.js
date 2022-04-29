@@ -1,8 +1,7 @@
 const DOMCreateForm = (() => {
-    // console.log('MAKE A FORM')
-
     const inputForm = document.createElement('div')
-    inputForm.classList.add('inputForm') 
+    inputForm.classList.add('inputForm')
+    inputForm.classList.add('hidden') 
 
     const formContainer = document.createElement('form')
     formContainer.classList.add('formContainer')
@@ -16,6 +15,10 @@ const DOMCreateForm = (() => {
     titleInput.setAttribute('type', 'text')
     titleInput.setAttribute('id', 'title')
     titleInput.setAttribute('name', 'title')
+
+    // REMOVE ME
+    titleInput.setAttribute('value', 'sometitle')
+
     formContainer.appendChild(titleInput)
 
     const descriptionLabel = document.createElement('label')
@@ -27,15 +30,44 @@ const DOMCreateForm = (() => {
     descriptionInput.setAttribute('type', 'text')
     descriptionInput.setAttribute('id', 'description')
     descriptionInput.setAttribute('name', 'description')
+
+    // REMOVE ME
+    descriptionInput.setAttribute('value', 'someDescription')
+
     formContainer.appendChild(descriptionInput)
 
+    const dueDateLabel = document.createElement('label')
+    dueDateLabel.setAttribute('for', 'dueDate')
+    dueDateLabel.textContent = 'Due Date:'
+    formContainer.appendChild(dueDateLabel)
+
+    const dueDateInput = document.createElement('input')
+    dueDateInput.setAttribute('type', 'text')
+    dueDateInput.setAttribute('id', 'dueDate')
+    dueDateInput.setAttribute('name', 'dueDate')
+
+    // REMOVE ME
+    dueDateInput.setAttribute('value', 'Tomorrow')
+
+    formContainer.appendChild(dueDateInput)
+
+    const priorityLabel = document.createElement('label')
+    priorityLabel.setAttribute('for', 'priorityLabel')
+    priorityLabel.textContent = 'Priority:'
+    formContainer.appendChild(priorityLabel)
+
+    const priorityInput = document.createElement('input')
+    priorityInput.setAttribute('type', 'text')
+    priorityInput.setAttribute('id', 'priority')
+    priorityInput.setAttribute('name', 'priority')
+
+    // REMOVE ME
+    priorityInput.setAttribute('value', 1)
+
+    formContainer.appendChild(priorityInput)
+
     inputForm.appendChild(formContainer)
-
-    const createNewTask = document.createElement('button')
-    createNewTask.textContent = 'Create New Task'
-    inputForm.appendChild(createNewTask)
-
-    document.querySelector('#content').appendChild(inputForm)
+    document.querySelector('.mainContent').appendChild(inputForm)
 })
 
 export default DOMCreateForm;

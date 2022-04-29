@@ -1,24 +1,43 @@
 import './style.css';
 import CreateToDoItem from './createToDoItem.js';
-import DOMAppendToDoItem from './DOMAppendToDoItem.js';
-import DOMCreateForm from './DOMCreateForm';
+// import DOMAppendToDoItem from './DOMAppendToDoItem.js'; DEPRECIATED
+import DOMDisplayToDoItems from './DOMDisplayToDoItems.js';
+import DOMCreateForm from './DOMCreateForm.js';
+import DOMCreateSidebar from './DOMCreateSidebar.js'
 
-document.querySelector('#content').textContent = 'HELLO'
-
-const addToDo = document.createElement('button')
-addToDo.classList.add('addToDo')
-addToDo.textContent = 'Add Task'
-addToDo.addEventListener('click', () => {
-    // need to create a form somewhere, 
-    // toggle 'display: hidden' to show/hide the form on button click
-})
-document.querySelector('#content').appendChild(addToDo)
-
-// console.log(CreateToDoItem('aTitle', 'aDescription', 'tomorrow', 1))
-DOMAppendToDoItem(CreateToDoItem('aTitle', 'aDescription', 'tomorrow', 69))
-DOMAppendToDoItem(CreateToDoItem('aTitle2', 'aDescription2', 'the next day', 42))
-DOMAppendToDoItem(CreateToDoItem('someTitle3', 'someDescription3', 'the next next day', 69))
-
+// inital DOM Setup
+DOMCreateSidebar()
+const mainContent = document.createElement('div')
+mainContent.classList.add('mainContent')
+document.querySelector('#content').appendChild(mainContent)
 DOMCreateForm()
 
-// console.log('dooky')
+const addTask = document.createElement('button')
+addTask.classList.add('addTask')
+addTask.textContent = 'Add Task'
+addTask.addEventListener('click', () => {
+    document.querySelector('.inputForm').classList.toggle('hidden')
+})
+document.querySelector('.mainContent').appendChild(addTask)
+
+const createNewTask = document.createElement('button')
+createNewTask.classList.add('createNewTask')
+createNewTask.textContent = 'Create New Task'
+createNewTask.addEventListener('click', () => {
+    // still needs to have input sanitized, new DOMAppend call in if/else statement
+    let title = document.querySelector('form').title.value
+    let description = document.querySelector('form').description.value
+    let dueDate = document.querySelector('form').dueDate.value
+    let priority = document.querySelector('form').priority.value
+
+    myToDos.push(CreateToDoItem(title, description, dueDate, priority))
+    DOMDisplayToDoItems(myToDos)
+    document.querySelector('form').reset()    
+})
+document.querySelector('.inputForm').appendChild(createNewTask)
+
+let myToDos = []
+myToDos.push(CreateToDoItem('aTitle', 'aDescription', 'tomorrow', 69))
+myToDos.push(CreateToDoItem('aTitle2', 'aDescription2', 'the next day', 42))
+myToDos.push(CreateToDoItem('someTitle3', 'someDescription3', 'the next next day', 69))
+DOMDisplayToDoItems(myToDos)
