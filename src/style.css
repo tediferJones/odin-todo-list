@@ -1,7 +1,77 @@
+html,
+body {
+    margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 #content {
+    /* margin: 0; */
     /* color: red; */
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    /* background-color: blueviolet; */
 }
 
 .hidden {
     display: none;
+}
+
+.sidebar {
+    background-color: purple;
+    color: white;
+}
+
+.mainContent {
+    /* padding: 0px 128px; */
+    background-color: rgb(81, 90, 107);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.inputForm {
+    height: 240px;
+    width: 360px;
+
+    background-color: whitesmoke;
+
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+}
+
+.addTask {
+    height: 64px;
+    width: 256px;
+    margin: 48px;
+
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: purple;
+    border-radius: 32px;
+    outline: none;
+    border: none;
+
+}
+
+.toDoItems {
+    width: 80%;
+}
+
+.toDoItem {
+    height: 64px;
+    margin: 24px;
+    padding: 0px 24px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
 }

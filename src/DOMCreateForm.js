@@ -42,12 +42,12 @@ const DOMCreateForm = (() => {
     formContainer.appendChild(dueDateLabel)
 
     const dueDateInput = document.createElement('input')
-    dueDateInput.setAttribute('type', 'text')
+    dueDateInput.setAttribute('type', 'datetime-local')// 'text')
     dueDateInput.setAttribute('id', 'dueDate')
     dueDateInput.setAttribute('name', 'dueDate')
 
     // REMOVE ME
-    dueDateInput.setAttribute('value', 'Tomorrow')
+    // dueDateInput.setAttribute('value', 'Tomorrow')
 
     formContainer.appendChild(dueDateInput)
 
@@ -57,7 +57,9 @@ const DOMCreateForm = (() => {
     formContainer.appendChild(priorityLabel)
 
     const priorityInput = document.createElement('input')
-    priorityInput.setAttribute('type', 'text')
+    priorityInput.setAttribute('type', 'number')//'text')
+    // priorityInput.setAttribute('min', '1')
+    // priorityInput.setAttribute('max', '8')
     priorityInput.setAttribute('id', 'priority')
     priorityInput.setAttribute('name', 'priority')
 

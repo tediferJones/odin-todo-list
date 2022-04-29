@@ -1,9 +1,20 @@
 const DOMCreateSidebar = (() => {
-    console.log('SIDEBAR')
-
     const sidebar = document.createElement('div')
     sidebar.classList.add('sidebar')
-    sidebar.textContent = 'IM THE SIDEBAR'
+
+    const welcome = document.createElement('h1')
+    welcome.textContent = 'Welcome!'
+    sidebar.appendChild(welcome)
+
+    const home = document.createElement('div')
+    home.classList.add('home')
+    home.textContent = 'Home'
+    sidebar.appendChild(home)
+
+    const viewProjects = document.createElement('div')
+    viewProjects.classList.add('viewProjects')
+    viewProjects.textContent = 'View Projects'
+    sidebar.appendChild(viewProjects)
 
     document.querySelector('#content').prepend(sidebar)
 })
