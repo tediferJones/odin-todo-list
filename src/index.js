@@ -3,7 +3,7 @@ import CreateToDoItem from './createToDoItem.js';
 // import DOMAppendToDoItem from './DOMAppendToDoItem.js'; DEPRECIATED
 import DOMDisplayToDoItems from './DOMDisplayToDoItems.js';
 import DOMCreateForm from './DOMCreateForm.js';
-import DOMCreateSidebar from './DOMCreateSidebar.js'
+import DOMCreateSidebar from './DOMCreateSidebar.js';
 
 // inital DOM Setup
 DOMCreateSidebar()
@@ -48,3 +48,5 @@ DOMDisplayToDoItems(myToDos)
 // create sideBar, shoudl have an option to view/create projects
 // find a way to organize projects, a project is just an array of a few specific objects
 // SANITIZE FORM INPUTS
+
+// immediately append description with the hidden class, add an icon to "expand" each item
