@@ -30,6 +30,7 @@ createNewTask.addEventListener('click', () => {
     let description = document.querySelector('form').description.value
     let dueDate = document.querySelector('form').dueDate.value
     let priority = document.querySelector('form').priority.value
+    dueDate = (new Date(dueDate)).toLocaleString()
 
     myToDos.push(CreateToDoItem(title, description, dueDate, priority))
     DOMDisplayToDoItems(myToDos)
@@ -38,11 +39,19 @@ createNewTask.addEventListener('click', () => {
 document.querySelector('.inputForm').appendChild(createNewTask)
 
 let myToDos = []
-myToDos.push(CreateToDoItem('aTitle', 'aDescription', 'tomorrow', 1))
-myToDos.push(CreateToDoItem('aTitle2', 'aDescription2', 'the next day', 4))
-myToDos.push(CreateToDoItem('someTitle3', 'someDescription3', 'the next next day', 8))
-DOMDisplayToDoItems(myToDos)
+myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+myToDos.push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
 
+// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 2))
+// myToDos.push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 3))
+// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 4))
+// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 5))
+// myToDos.push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 6))
+// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 7))
+// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 8))
+DOMDisplayToDoItems(myToDos)
 
 // do some styling
 // create sideBar, shoudl have an option to view/create projects

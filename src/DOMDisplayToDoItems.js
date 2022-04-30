@@ -19,8 +19,9 @@ const DOMDisplayToDoItems = ((toDoArray) => {
             let itemAttr = document.createElement('div')
             itemAttr.classList.add(`${key}`)
             itemAttr.textContent = toDoArray[i][key]
-            // toDoItem.appendChild(itemAttr)
             if (key === 'priority') {
+                let priorityColors = ['red','orangered','goldenrod','orange','gold','lightseagreen','yellowgreen','lightgreen']
+                itemAttr.style.backgroundColor = priorityColors[toDoArray[i][key] - 1]
                 mainAttrs.prepend(itemAttr)
             } else if (key === 'description') {
                 details.classList.add('hidden')
@@ -34,6 +35,7 @@ const DOMDisplayToDoItems = ((toDoArray) => {
         extendIcon.src = extender001
         extendIcon.addEventListener('click', () => {
             details.classList.toggle('hidden')
+            mainAttrs.classList.toggle('toggleCorners')
         })
         mainAttrs.appendChild(extendIcon)
 

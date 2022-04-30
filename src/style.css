@@ -20,7 +20,11 @@ body {
 .sidebar {
     background-color: purple;
     color: white;
-}
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px; }
 
 .mainContent {
     /* padding: 0px 128px; */
@@ -75,4 +79,34 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 24px;
+}
+
+.priority {
+    margin-left: -24px;
+    height: 64px;
+    width: 64px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.details {
+    background-color: rgb(201, 201, 201);
+    margin: -24px 24px 0px;
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    
+}
+
+.toggleCorners {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.description {
+    padding: 12px;
 }
