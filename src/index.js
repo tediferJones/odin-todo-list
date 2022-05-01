@@ -4,12 +4,21 @@ import CreateToDoItem from './createToDoItem.js';
 import DOMDisplayToDoItems from './DOMDisplayToDoItems.js';
 import DOMCreateForm from './DOMCreateForm.js';
 import DOMCreateSidebar from './DOMCreateSidebar.js';
- 
+
+let allProjects = {
+    myToDos: []
+}
+
 // inital DOM Setup
-DOMCreateSidebar()
+DOMCreateSidebar(allProjects) // pass allProjects to DOMCreateSideBar(), so it can create the appropiate sidebar links
 const mainContent = document.createElement('div')
 mainContent.classList.add('mainContent')
 document.querySelector('#content').appendChild(mainContent)
+
+allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
+DOMDisplayToDoItems(allProjects['myToDos'])
 
 const addTask = document.createElement('button')
 addTask.classList.add('addTask')
@@ -31,18 +40,26 @@ addTask.addEventListener('click', () => {
                 let description = document.querySelector('.formContainer').description.value
                 let dueDate = document.querySelector('.formContainer').dueDate.value
                 let priority = document.querySelector('.formContainer').priority.value
+                // NO SHIT YOU GOTTA PULL THE PROJECT INFO TO ADD IT TO THE RIGHT PROJECT
+                let selectProject = document.querySelector('.formContainer').selectProject.value
                 dueDate = (new Date(dueDate)).toLocaleString()
 
+                // all tasks go to myToDos, but if a project is selected, it will also display there
                 allProjects['myToDos'].push(CreateToDoItem(title, description, dueDate, priority))
+                if (selectProject != 'myToDos') {
+                    console.log('DO THE THINGS')
+                    allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
+                }
+
                 DOMDisplayToDoItems(allProjects['myToDos'])
                 document.querySelector('form').reset()
-                document.querySelector('.inputForm').classList.toggle('hidden')
+                document.querySelector('.inputForm').remove()// classList.toggle('hidden')
             })
             document.querySelector('.inputForm').appendChild(createNewTask)
         }
     }
 })
-document.querySelector('.mainContent').appendChild(addTask)
+document.querySelector('.mainContent').prepend(addTask) // appendChild(addTask)
 
 document.querySelector('.newProject').addEventListener('click', () => {
     if (document.querySelector('.newProjectContainer')) {
@@ -71,10 +88,27 @@ document.querySelector('.newProject').addEventListener('click', () => {
         createProject.textContent = 'Create Project'
         createProject.addEventListener('click', () => {
             allProjects[document.querySelector('.projectForm').projectInput.value] = []
+            // DOMUpdateSidebar(allProjects)
             // GENERATE AN ELEMENT IN THE SIDEBAR THAT WHEN CLICKED, WILL RUN DOMDisplayToDoItems(allProjects['WHATEVER'])
             // DONT PUT THAT LOGIC HERE, PUT IT IN THE DOMCreateSidebar MODULE
             // conside what will happen loading a file, we want the sidebar to generate a div for
             // each key in allProjects object, that will DOMDisplay(thatSpecificArray)
+
+            document.querySelector('.projectsContainer').innerHTML = ''
+            for (let key in allProjects) {
+                console.log(key)
+                let projectLink = document.createElement('div')
+                projectLink.classList.add('projectLink')
+                projectLink.textContent = key
+                projectLink.addEventListener('click', () => {
+                    // need to call DOMDisplay on allProjects[key]
+                    console.log(allProjects[key])
+                    DOMDisplayToDoItems(allProjects[key])
+                })
+                document.querySelector('.projectsContainer').appendChild(projectLink)
+            }
+
+            document.querySelector('.newProjectContainer').remove()
         })
         newProjectContainer.appendChild(createProject)
 
@@ -82,14 +116,16 @@ document.querySelector('.newProject').addEventListener('click', () => {
     }
 })
 
-let allProjects = {
-    myToDos: []
-}
 
-allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
-DOMDisplayToDoItems(allProjects['myToDos'])
+
+// let allProjects = {
+//     myToDos: []
+// }
+
+// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
+// DOMDisplayToDoItems(allProjects['myToDos'])
 
 // myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
 // myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 2))
