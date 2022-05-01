@@ -1,7 +1,8 @@
-const DOMCreateForm = (() => {
+const DOMCreateForm = ((allProjects) => {
+    // console.log(allProjects)
     const inputForm = document.createElement('div')
     inputForm.classList.add('inputForm')
-    inputForm.classList.add('hidden') 
+    // inputForm.classList.add('hidden') 
 
     const formContainer = document.createElement('form')
     formContainer.classList.add('formContainer')
@@ -52,7 +53,7 @@ const DOMCreateForm = (() => {
     formContainer.appendChild(dueDateInput)
 
     const priorityLabel = document.createElement('label')
-    priorityLabel.setAttribute('for', 'priorityLabel')
+    priorityLabel.setAttribute('for', 'priority')
     priorityLabel.textContent = 'Priority:'
     formContainer.appendChild(priorityLabel)
 
@@ -67,6 +68,29 @@ const DOMCreateForm = (() => {
     priorityInput.setAttribute('value', 1)
 
     formContainer.appendChild(priorityInput)
+
+    // make a thing, append it to formContainer
+
+    const selectProjectLabel = document.createElement('label')
+    selectProjectLabel.setAttribute('for', 'selectProject')
+    selectProjectLabel.textContent = 'For which project?'
+    formContainer.appendChild(selectProjectLabel)
+
+    let selectProjectInput = document.createElement('select')
+    selectProjectInput.setAttribute('id', 'selectProject')
+    selectProjectInput.setAttribute('name', 'selectProject')
+    // THIS DOES NOT REPEAT, ONLY WORKS ONCE
+    for (let key in allProjects) {
+        console.log(key)
+        let projectSelection = document.createElement('option')
+        projectSelection.setAttribute('value', key)
+        projectSelection.textContent = key
+        selectProjectInput.appendChild(projectSelection)
+    }
+
+    formContainer.appendChild(selectProjectInput)
+
+    // END TEST AREA
 
     inputForm.appendChild(formContainer)
     document.querySelector('.mainContent').appendChild(inputForm)

@@ -16,6 +16,11 @@ const DOMCreateSidebar = (() => {
     viewProjects.textContent = 'View Projects'
     sidebar.appendChild(viewProjects)
 
+    const newProject = document.createElement('button')
+    newProject.classList.add('newProject')
+    newProject.textContent = 'Add New Project'
+    sidebar.appendChild(newProject)
+
     document.querySelector('#content').prepend(sidebar)
 })
 
