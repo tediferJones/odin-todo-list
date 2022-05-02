@@ -1,7 +1,7 @@
 import extender001 from './extendIcon.png';
-import DeleteIcon from './deleteIcon.png'
-
-const DOMDisplayToDoItems = ((toDoArray) => {
+import DeleteIcon from './deleteIcon.png';
+ 
+const DOMDisplayToDoItems = ((toDoArray, allProjects) => {
     if (document.querySelector('.toDoItems')) {
         document.querySelector('.mainContent').removeChild(document.querySelector('.toDoItems'))
     }
@@ -28,7 +28,6 @@ const DOMDisplayToDoItems = ((toDoArray) => {
                 details.classList.add('hidden')
                 details.appendChild(itemAttr)
             } else if (key === 'dueDate') {
-                // console.log('DO TIME MATH')
                 let timeTillDue = Date.parse(toDoArray[i]['dueDate']) - Date.now()
                 itemAttr.textContent = readableTime(timeTillDue)
                 mainAttrs.appendChild(itemAttr)
@@ -50,9 +49,8 @@ const DOMDisplayToDoItems = ((toDoArray) => {
         deleteIcon.src = DeleteIcon
         deleteIcon.classList.add('deleteIcon')
         deleteIcon.addEventListener('click', () => {
-            console.log('REMOVE THE ITEM')
-            // consider adding the event listener in index.js
-            // search through all the array's in allProjects object, if any object in any of the array's are equal to the source item, then remove that item
+            toDoArray.splice(toDoArray.indexOf(toDoArray[i]), 1)
+            DOMDisplayToDoItems(toDoArray, allProjects)
         })
         details.appendChild(deleteIcon)
 
@@ -65,7 +63,6 @@ const DOMDisplayToDoItems = ((toDoArray) => {
 })
 
 function readableTime(milliSec) {
-    console.log('READABLE TIMESTAMPS')
     let timeStr = ''
     if (milliSec/86400000 > 365) {
         return 'Over a year'

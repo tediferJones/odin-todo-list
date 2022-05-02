@@ -57,7 +57,7 @@ const DOMCreateForm = ((allProjects) => {
             dueDateInputContainer.appendChild(dueDateLabel)
 
                 const dueDateInput = document.createElement('input')
-                dueDateInput.setAttribute('type', 'datetime-local') // add year selection
+                dueDateInput.setAttribute('type', 'datetime-local')
                 dueDateInput.setAttribute('id', 'dueDate')
                 dueDateInput.setAttribute('name', 'dueDate')
 
@@ -99,7 +99,6 @@ const DOMCreateForm = ((allProjects) => {
                 selectProjectInput.setAttribute('id', 'selectProject')
                 selectProjectInput.setAttribute('name', 'selectProject')
                 for (let key in allProjects) {
-                    console.log(key)
                     let projectSelection = document.createElement('option')
                     projectSelection.setAttribute('value', key)
                     projectSelection.textContent = key

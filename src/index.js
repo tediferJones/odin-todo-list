@@ -1,6 +1,5 @@
 import './style.css';
 import CreateToDoItem from './createToDoItem.js';
-// import DOMAppendToDoItem from './DOMAppendToDoItem.js'; DEPRECIATED
 import DOMDisplayToDoItems from './DOMDisplayToDoItems.js';
 import DOMCreateForm from './DOMCreateForm.js';
 import DOMCreateSidebar from './DOMCreateSidebar.js';
@@ -10,15 +9,15 @@ let allProjects = {
 }
 
 // inital DOM Setup
-DOMCreateSidebar(allProjects) // pass allProjects to DOMCreateSideBar(), so it can create the appropiate sidebar links
+DOMCreateSidebar(allProjects)
 const mainContent = document.createElement('div')
 mainContent.classList.add('mainContent')
 document.querySelector('#content').appendChild(mainContent)
 
-// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
-DOMDisplayToDoItems(allProjects['myToDos'])
+allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
+DOMDisplayToDoItems(allProjects['myToDos'], allProjects)
 
 const addTask = document.createElement('button')
 addTask.classList.add('addTask')
@@ -40,26 +39,20 @@ addTask.addEventListener('click', () => {
                 let description = document.querySelector('.formContainer').description.value
                 let dueDate = document.querySelector('.formContainer').dueDate.value
                 let priority = document.querySelector('.formContainer').priority.value
-                // NO SHIT YOU GOTTA PULL THE PROJECT INFO TO ADD IT TO THE RIGHT PROJECT
                 let selectProject = document.querySelector('.formContainer').selectProject.value
                 dueDate = (new Date(dueDate)).toLocaleString()
 
-                // all tasks go to myToDos, but if a project is selected, it will also display there
-                allProjects['myToDos'].push(CreateToDoItem(title, description, dueDate, priority))
-                if (selectProject != 'myToDos') {
-                    // console.log('DO THE THINGS')
-                    allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
-                }
+                allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
 
-                DOMDisplayToDoItems(allProjects['myToDos'])
+                DOMDisplayToDoItems(allProjects[selectProject], allProjects)
                 document.querySelector('form').reset()
-                document.querySelector('.inputForm').remove()// classList.toggle('hidden')
+                document.querySelector('.inputForm').remove()
             })
             document.querySelector('.inputForm').appendChild(createNewTask)
         }
     }
 })
-document.querySelector('.mainContent').prepend(addTask) // appendChild(addTask)
+document.querySelector('.mainContent').prepend(addTask)
 
 document.querySelector('.newProject').addEventListener('click', () => {
     if (document.querySelector('.newProjectContainer')) {
@@ -88,22 +81,14 @@ document.querySelector('.newProject').addEventListener('click', () => {
         createProject.textContent = 'Create Project'
         createProject.addEventListener('click', () => {
             allProjects[document.querySelector('.projectForm').projectInput.value] = []
-            // DOMUpdateSidebar(allProjects)
-            // GENERATE AN ELEMENT IN THE SIDEBAR THAT WHEN CLICKED, WILL RUN DOMDisplayToDoItems(allProjects['WHATEVER'])
-            // DONT PUT THAT LOGIC HERE, PUT IT IN THE DOMCreateSidebar MODULE
-            // conside what will happen loading a file, we want the sidebar to generate a div for
-            // each key in allProjects object, that will DOMDisplay(thatSpecificArray)
 
             document.querySelector('.projectsContainer').innerHTML = ''
             for (let key in allProjects) {
-                // console.log(key)
                 let projectLink = document.createElement('div')
                 projectLink.classList.add('projectLink')
                 projectLink.textContent = key
                 projectLink.addEventListener('click', () => {
-                    // need to call DOMDisplay on allProjects[key]
-                    // console.log(allProjects[key])
-                    DOMDisplayToDoItems(allProjects[key])
+                    DOMDisplayToDoItems(allProjects[key], allProjects)
                 })
                 document.querySelector('.projectsContainer').appendChild(projectLink)
             }
@@ -117,7 +102,7 @@ document.querySelector('.newProject').addEventListener('click', () => {
 })
 
 // SANITIZE FORM INPUTS
-// add button to each item that will remove it from the myToDos array and its project
+// [ DONE ] add button to each item that will remove it from the myToDos array and its project
 // [ DONE ] cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
 // [ DONE ] then convert milliseconds to "X Days, Y Hours, and Z minutes"
 // figure out way to "save" our data so this app can actually be useful!
