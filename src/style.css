@@ -5,12 +5,9 @@ body {
 }
 
 #content {
-    /* margin: 0; */
-    /* color: red; */
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    /* background-color: blueviolet; */
 }
 
 .hidden {
@@ -27,15 +24,40 @@ body {
     gap: 24px;
 }
 
-.projectContainer {
-    /* THIS DOESNT DO ANYTHING */
-    font-size: 36px;
+.projectsContainer {
+    font-size: 24px;
     font-weight: bold;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+}
+
+.projectLink {
+    cursor: pointer;
+}
+
+.newProject {
+    height: 48px;
+    border-radius: 24px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(81, 90, 107);
+    color: white;
+    font-weight: bold;
+} 
+
+.newProjectContainer {
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 .mainContent {
-    /* padding: 0px 128px; */
     background-color: rgb(81, 90, 107);
 
     display: flex;
@@ -48,10 +70,25 @@ body {
     width: 360px;
 
     background-color: whitesmoke;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 4px;
 
     position: fixed;
-    top: 50vh;
-    left: 50vw;
+    top: calc(50vh - 120px);
+    left: calc(50vw - 180px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 .addTask {
@@ -66,14 +103,13 @@ body {
     border-radius: 32px;
     outline: none;
     border: none;
-
+    cursor: pointer;
 }
 
 .toDoItems {
     width: 80%;
 }
 
-/* .toDoItem */
 .mainAttrs {
     height: 64px;
     margin: 24px;
@@ -117,4 +153,8 @@ body {
 
 .description {
     padding: 12px;
+}
+
+.extendIcon { 
+    cursor: pointer; 
 }

@@ -33,6 +33,7 @@ const DOMDisplayToDoItems = ((toDoArray) => {
         
         let extendIcon = new Image();
         extendIcon.src = extender001
+        extendIcon.classList.add('extendIcon')
         extendIcon.addEventListener('click', () => {
             details.classList.toggle('hidden')
             mainAttrs.classList.toggle('toggleCorners')

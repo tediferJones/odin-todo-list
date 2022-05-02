@@ -1,96 +1,114 @@
 const DOMCreateForm = ((allProjects) => {
-    // console.log(allProjects)
     const inputForm = document.createElement('div')
     inputForm.classList.add('inputForm')
-    // inputForm.classList.add('hidden') 
 
-    const formContainer = document.createElement('form')
-    formContainer.classList.add('formContainer')
+        const formContainer = document.createElement('form')
+        formContainer.classList.add('formContainer')
 
-    const titleLabel = document.createElement('label')
-    titleLabel.setAttribute('for', 'title')
-    titleLabel.textContent = 'Title:'
-    formContainer.appendChild(titleLabel)
+            const titleInputContainer = document.createElement('div')
+            titleInputContainer.classList.add('inputContainer')
 
-    const titleInput = document.createElement('input')
-    titleInput.setAttribute('type', 'text')
-    titleInput.setAttribute('id', 'title')
-    titleInput.setAttribute('name', 'title')
+                const titleLabel = document.createElement('label')
+                titleLabel.setAttribute('for', 'title')
+                titleLabel.textContent = 'Title:'
 
-    // REMOVE ME
-    titleInput.setAttribute('value', 'sometitle')
+            titleInputContainer.appendChild(titleLabel)
 
-    formContainer.appendChild(titleInput)
+                const titleInput = document.createElement('input')
+                titleInput.setAttribute('type', 'text')
+                titleInput.setAttribute('id', 'title')
+                titleInput.setAttribute('name', 'title')
 
-    const descriptionLabel = document.createElement('label')
-    descriptionLabel.setAttribute('for', 'description')
-    descriptionLabel.textContent = 'Description:'
-    formContainer.appendChild(descriptionLabel)
+                // REMOVE ME
+                titleInput.setAttribute('value', 'sometitle')
 
-    const descriptionInput = document.createElement('input')
-    descriptionInput.setAttribute('type', 'text')
-    descriptionInput.setAttribute('id', 'description')
-    descriptionInput.setAttribute('name', 'description')
+            titleInputContainer.appendChild(titleInput)
 
-    // REMOVE ME
-    descriptionInput.setAttribute('value', 'someDescription')
+        formContainer.appendChild(titleInputContainer)
 
-    formContainer.appendChild(descriptionInput)
+            const descriptionInputContainer = document.createElement('div')
+            descriptionInputContainer.classList.add('inputContainer')
 
-    const dueDateLabel = document.createElement('label')
-    dueDateLabel.setAttribute('for', 'dueDate')
-    dueDateLabel.textContent = 'Due Date:'
-    formContainer.appendChild(dueDateLabel)
+                const descriptionLabel = document.createElement('label')
+                descriptionLabel.setAttribute('for', 'description')
+                descriptionLabel.textContent = 'Description:'
 
-    const dueDateInput = document.createElement('input')
-    dueDateInput.setAttribute('type', 'datetime-local')// 'text')
-    dueDateInput.setAttribute('id', 'dueDate')
-    dueDateInput.setAttribute('name', 'dueDate')
+            descriptionInputContainer.appendChild(descriptionLabel)
 
-    // REMOVE ME
-    // dueDateInput.setAttribute('value', 'Tomorrow')
+                const descriptionInput = document.createElement('input')
+                descriptionInput.setAttribute('type', 'text')
+                descriptionInput.setAttribute('id', 'description')
+                descriptionInput.setAttribute('name', 'description')
 
-    formContainer.appendChild(dueDateInput)
+                // REMOVE ME
+                descriptionInput.setAttribute('value', 'someDescription')
 
-    const priorityLabel = document.createElement('label')
-    priorityLabel.setAttribute('for', 'priority')
-    priorityLabel.textContent = 'Priority:'
-    formContainer.appendChild(priorityLabel)
+            descriptionInputContainer.appendChild(descriptionInput)
 
-    const priorityInput = document.createElement('input')
-    priorityInput.setAttribute('type', 'number')//'text')
-    // priorityInput.setAttribute('min', '1')
-    // priorityInput.setAttribute('max', '8')
-    priorityInput.setAttribute('id', 'priority')
-    priorityInput.setAttribute('name', 'priority')
+        formContainer.appendChild(descriptionInputContainer)
 
-    // REMOVE ME
-    priorityInput.setAttribute('value', 1)
+            const dueDateInputContainer = document.createElement('div')
+            dueDateInputContainer.classList.add('inputContainer')
 
-    formContainer.appendChild(priorityInput)
+                const dueDateLabel = document.createElement('label')
+                dueDateLabel.setAttribute('for', 'dueDate')
+                dueDateLabel.textContent = 'Due Date:'
 
-    // make a thing, append it to formContainer
+            dueDateInputContainer.appendChild(dueDateLabel)
 
-    const selectProjectLabel = document.createElement('label')
-    selectProjectLabel.setAttribute('for', 'selectProject')
-    selectProjectLabel.textContent = 'For which project?'
-    formContainer.appendChild(selectProjectLabel)
+                const dueDateInput = document.createElement('input')
+                dueDateInput.setAttribute('type', 'datetime-local') // add year selection
+                dueDateInput.setAttribute('id', 'dueDate')
+                dueDateInput.setAttribute('name', 'dueDate')
 
-    let selectProjectInput = document.createElement('select')
-    selectProjectInput.setAttribute('id', 'selectProject')
-    selectProjectInput.setAttribute('name', 'selectProject')
-    // THIS DOES NOT REPEAT, ONLY WORKS ONCE
-    for (let key in allProjects) {
-        console.log(key)
-        let projectSelection = document.createElement('option')
-        projectSelection.setAttribute('value', key)
-        projectSelection.textContent = key
-        selectProjectInput.appendChild(projectSelection)
-    }
+            dueDateInputContainer.appendChild(dueDateInput)
 
-    formContainer.appendChild(selectProjectInput)
+        formContainer.appendChild(dueDateInputContainer)
 
-    // END TEST AREA
+            const priorityInputContainer = document.createElement('div')
+            priorityInputContainer.classList.add('inputContainer')
+
+                const priorityLabel = document.createElement('label')
+                priorityLabel.setAttribute('for', 'priority')
+                priorityLabel.textContent = 'Priority:'
+
+            priorityInputContainer.appendChild(priorityLabel)
+
+                const priorityInput = document.createElement('input')
+                priorityInput.setAttribute('type', 'number')
+                priorityInput.setAttribute('id', 'priority')
+                priorityInput.setAttribute('name', 'priority')
+
+                // REMOVE ME
+                priorityInput.setAttribute('value', 1)
+
+            priorityInputContainer.appendChild(priorityInput)
+
+        formContainer.appendChild(priorityInputContainer)
+
+            const selectProjectInputContainer = document.createElement('div')
+            selectProjectInputContainer.classList.add('inputContainer')
+
+                const selectProjectLabel = document.createElement('label')
+                selectProjectLabel.setAttribute('for', 'selectProject')
+                selectProjectLabel.textContent = 'For which project?'
+                
+            selectProjectInputContainer.appendChild(selectProjectLabel)
+
+                let selectProjectInput = document.createElement('select')
+                selectProjectInput.setAttribute('id', 'selectProject')
+                selectProjectInput.setAttribute('name', 'selectProject')
+                for (let key in allProjects) {
+                    console.log(key)
+                    let projectSelection = document.createElement('option')
+                    projectSelection.setAttribute('value', key)
+                    projectSelection.textContent = key
+                    selectProjectInput.appendChild(projectSelection)
+                }
+                
+            selectProjectInputContainer.appendChild(selectProjectInput)
+
+        formContainer.appendChild(selectProjectInputContainer)
 
     inputForm.appendChild(formContainer)
     document.querySelector('.mainContent').appendChild(inputForm)

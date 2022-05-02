@@ -136,9 +136,8 @@ document.querySelector('.newProject').addEventListener('click', () => {
 // myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 7))
 // myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 8))
 
-// do some styling
-// create sideBar, shoudl have an option to view/create projects
-// find a way to organize projects, a project is just an array of a few specific objects
 // SANITIZE FORM INPUTS
-
-// immediately append description with the hidden class, add an icon to "expand" each item
+// add button to each item that will remove it from the myToDos array and its project
+// cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
+// then convert milliseconds to "X Days, Y Hours, and Z minutes"
+// figure out way to "save" our data so this app can actually be useful!
