@@ -15,9 +15,9 @@ const mainContent = document.createElement('div')
 mainContent.classList.add('mainContent')
 document.querySelector('#content').appendChild(mainContent)
 
-allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
+// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
+// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
 DOMDisplayToDoItems(allProjects['myToDos'])
 
 const addTask = document.createElement('button')
@@ -47,7 +47,7 @@ addTask.addEventListener('click', () => {
                 // all tasks go to myToDos, but if a project is selected, it will also display there
                 allProjects['myToDos'].push(CreateToDoItem(title, description, dueDate, priority))
                 if (selectProject != 'myToDos') {
-                    console.log('DO THE THINGS')
+                    // console.log('DO THE THINGS')
                     allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
                 }
 
@@ -96,13 +96,13 @@ document.querySelector('.newProject').addEventListener('click', () => {
 
             document.querySelector('.projectsContainer').innerHTML = ''
             for (let key in allProjects) {
-                console.log(key)
+                // console.log(key)
                 let projectLink = document.createElement('div')
                 projectLink.classList.add('projectLink')
                 projectLink.textContent = key
                 projectLink.addEventListener('click', () => {
                     // need to call DOMDisplay on allProjects[key]
-                    console.log(allProjects[key])
+                    // console.log(allProjects[key])
                     DOMDisplayToDoItems(allProjects[key])
                 })
                 document.querySelector('.projectsContainer').appendChild(projectLink)
@@ -116,28 +116,8 @@ document.querySelector('.newProject').addEventListener('click', () => {
     }
 })
 
-
-
-// let allProjects = {
-//     myToDos: []
-// }
-
-// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
-// DOMDisplayToDoItems(allProjects['myToDos'])
-
-// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 2))
-// myToDos.push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 3))
-// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 4))
-// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 5))
-// myToDos.push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 6))
-// myToDos.push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 7))
-// myToDos.push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 8))
-
 // SANITIZE FORM INPUTS
 // add button to each item that will remove it from the myToDos array and its project
-// cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
-// then convert milliseconds to "X Days, Y Hours, and Z minutes"
+// [ DONE ] cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
+// [ DONE ] then convert milliseconds to "X Days, Y Hours, and Z minutes"
 // figure out way to "save" our data so this app can actually be useful!

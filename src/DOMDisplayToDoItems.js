@@ -1,4 +1,5 @@
 import extender001 from './extendIcon.png';
+import DeleteIcon from './deleteIcon.png'
 
 const DOMDisplayToDoItems = ((toDoArray) => {
     if (document.querySelector('.toDoItems')) {
@@ -26,6 +27,11 @@ const DOMDisplayToDoItems = ((toDoArray) => {
             } else if (key === 'description') {
                 details.classList.add('hidden')
                 details.appendChild(itemAttr)
+            } else if (key === 'dueDate') {
+                // console.log('DO TIME MATH')
+                let timeTillDue = Date.parse(toDoArray[i]['dueDate']) - Date.now()
+                itemAttr.textContent = readableTime(timeTillDue)
+                mainAttrs.appendChild(itemAttr)
             } else {
                 mainAttrs.appendChild(itemAttr)
             }
@@ -40,6 +46,16 @@ const DOMDisplayToDoItems = ((toDoArray) => {
         })
         mainAttrs.appendChild(extendIcon)
 
+        let deleteIcon = new Image()
+        deleteIcon.src = DeleteIcon
+        deleteIcon.classList.add('deleteIcon')
+        deleteIcon.addEventListener('click', () => {
+            console.log('REMOVE THE ITEM')
+            // consider adding the event listener in index.js
+            // search through all the array's in allProjects object, if any object in any of the array's are equal to the source item, then remove that item
+        })
+        details.appendChild(deleteIcon)
+
         toDoItem.appendChild(mainAttrs)
         toDoItem.appendChild(details)
 
@@ -47,5 +63,24 @@ const DOMDisplayToDoItems = ((toDoArray) => {
     }
     document.querySelector('.mainContent').appendChild(toDoItems)
 })
+
+function readableTime(milliSec) {
+    console.log('READABLE TIMESTAMPS')
+    let timeStr = ''
+    if (milliSec/86400000 > 365) {
+        return 'Over a year'
+    } else {
+        if (Math.floor(milliSec/86400000) > 0) {
+            timeStr += `${Math.floor(milliSec/86400000)}D | `
+        }
+        if (Math.floor((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24) > 0) {
+            timeStr += `${Math.floor((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24)}H | `
+        }
+        if (Math.floor((((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24) - Math.floor((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24)) * 60) > 1) {
+            timeStr += `${Math.floor((((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24) - Math.floor((milliSec/86400000 - Math.floor(milliSec/86400000)) * 24)) * 60)}M`
+        }
+        return timeStr
+    }
+}
 
 export default DOMDisplayToDoItems

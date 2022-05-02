@@ -18,13 +18,13 @@ const DOMCreateSidebar = ((allProjects) => {
 
     // new stuff
 
-    console.log(allProjects)
+    // console.log(allProjects)
 
     const projectsContainer = document.createElement('div')
     projectsContainer.classList.add('projectsContainer')
 
     for (let key in allProjects) {
-        console.log(key)
+        // console.log(key)
         let projectLink = document.createElement('div')
         projectLink.classList.add('projectLink')
         projectLink.textContent = key
