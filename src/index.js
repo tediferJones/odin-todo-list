@@ -96,6 +96,7 @@ document.querySelector('.newProject').addEventListener('click', () => {
             for (let key in allProjects) {
                 let projectLink = document.createElement('div')
                 projectLink.classList.add('projectLink')
+                projectLink.classList.add(key.replace(/ /g, ''))
                 projectLink.textContent = key
                 projectLink.addEventListener('click', () => {
                     DOMDisplayToDoItems(allProjects[key], allProjects)
@@ -106,8 +107,7 @@ document.querySelector('.newProject').addEventListener('click', () => {
             document.querySelector('.newProjectContainer').remove()
         })
         newProjectContainer.appendChild(createProject)
-
-        document.querySelector('.sidebar').appendChild(newProjectContainer)
+        document.querySelector('.newProjectSuperContainer').appendChild(newProjectContainer)
     }
 })
 
@@ -138,10 +138,14 @@ removeProject.addEventListener('click', () => {
         removeInput.setAttribute('id', 'removeProject')
         removeInput.setAttribute('name', 'removeProject')
         for (let key in allProjects) {
+            console.log(key)
+            if (key != 'myToDos') {
             let projectRemoveSelection = document.createElement('option')
             projectRemoveSelection.setAttribute('value', key)
             projectRemoveSelection.textContent = key
             removeInput.appendChild(projectRemoveSelection)
+            }
+            
         }
         removeForm.appendChild(removeInput)
         removeFormContainer.appendChild(removeForm)
@@ -151,8 +155,14 @@ removeProject.addEventListener('click', () => {
         removeProjectBtn.textContent = 'Remove Project'
         removeProjectBtn.addEventListener('click', () => {
             console.log('REMOVE THE THING')
-            console.log(document.querySelector('.removeForm').removeProject.value)
+            let temp = document.querySelector('.removeForm').removeProject.value.replace(/ /g, '')
+            console.log(temp)
+            document.querySelector(`.${temp}`).remove()
             delete allProjects[document.querySelector('.removeForm').removeProject.value]
+            localStorage.setItem('allToDos', JSON.stringify(allProjects))
+            console.log(allProjects)
+            DOMDisplayToDoItems(allProjects['myToDos'], allProjects)
+            document.querySelector('.removeFormContainer').remove()
         })
         removeFormContainer.appendChild(removeProjectBtn)
 

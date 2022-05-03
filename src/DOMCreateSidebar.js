@@ -14,6 +14,7 @@ const DOMCreateSidebar = ((allProjects) => {
     for (let key in allProjects) {
         let projectLink = document.createElement('div')
         projectLink.classList.add('projectLink')
+        projectLink.classList.add(key.replace(/ /g, ''))
         projectLink.textContent = key
         projectLink.addEventListener('click', () => {
             DOMDisplayToDoItems(allProjects[key], allProjects)
