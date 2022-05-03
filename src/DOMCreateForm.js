@@ -78,6 +78,8 @@ const DOMCreateForm = ((allProjects) => {
                 priorityInput.setAttribute('type', 'number')
                 priorityInput.setAttribute('id', 'priority')
                 priorityInput.setAttribute('name', 'priority')
+                priorityInput.setAttribute('max', '8')
+                priorityInput.setAttribute('min', '1')
 
                 // REMOVE ME
                 priorityInput.setAttribute('value', 1)

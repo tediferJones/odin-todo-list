@@ -41,6 +41,8 @@ const DOMDisplayToDoItems = ((toDoArray, allProjects) => {
         extendIcon.classList.add('extendIcon')
         extendIcon.addEventListener('click', () => {
             details.classList.toggle('hidden')
+            details.classList.toggle('shown')
+            console.log(mainAttrs.querySelector('.priority').classList.toggle('priorityCorner'))
             mainAttrs.classList.toggle('toggleCorners')
         })
         mainAttrs.appendChild(extendIcon)
@@ -50,6 +52,7 @@ const DOMDisplayToDoItems = ((toDoArray, allProjects) => {
         deleteIcon.classList.add('deleteIcon')
         deleteIcon.addEventListener('click', () => {
             toDoArray.splice(toDoArray.indexOf(toDoArray[i]), 1)
+            localStorage.setItem('allToDos', JSON.stringify(allProjects))
             DOMDisplayToDoItems(toDoArray, allProjects)
         })
         details.appendChild(deleteIcon)

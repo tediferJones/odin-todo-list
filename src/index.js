@@ -8,15 +8,19 @@ let allProjects = {
     myToDos: []
 }
 
+if (localStorage.allToDos) {
+    allProjects = JSON.parse(localStorage.allToDos)
+}
+
 // inital DOM Setup
 DOMCreateSidebar(allProjects)
 const mainContent = document.createElement('div')
 mainContent.classList.add('mainContent')
 document.querySelector('#content').appendChild(mainContent)
 
-allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', 'tomorrow', 1))
-allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
+// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', '2023-1-1T00:00:00', 1))
+// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
+// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
 DOMDisplayToDoItems(allProjects['myToDos'], allProjects)
 
 const addTask = document.createElement('button')
@@ -42,7 +46,9 @@ addTask.addEventListener('click', () => {
                 let selectProject = document.querySelector('.formContainer').selectProject.value
                 dueDate = (new Date(dueDate)).toLocaleString()
 
+                // if all form data is appropiate, then do this stuff, otherwise, append an error message to formdiv
                 allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
+                localStorage.setItem('allToDos', JSON.stringify(allProjects))
 
                 DOMDisplayToDoItems(allProjects[selectProject], allProjects)
                 document.querySelector('form').reset()
@@ -81,6 +87,7 @@ document.querySelector('.newProject').addEventListener('click', () => {
         createProject.textContent = 'Create Project'
         createProject.addEventListener('click', () => {
             allProjects[document.querySelector('.projectForm').projectInput.value] = []
+            localStorage.setItem('allToDos', JSON.stringify(allProjects))
 
             document.querySelector('.projectsContainer').innerHTML = ''
             for (let key in allProjects) {
@@ -105,4 +112,4 @@ document.querySelector('.newProject').addEventListener('click', () => {
 // [ DONE ] add button to each item that will remove it from the myToDos array and its project
 // [ DONE ] cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
 // [ DONE ] then convert milliseconds to "X Days, Y Hours, and Z minutes"
-// figure out way to "save" our data so this app can actually be useful!
+// [ DONE ] figure out way to "save" our data so this app can actually be useful!

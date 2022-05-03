@@ -151,6 +151,19 @@ body {
     border-bottom-right-radius: 0px;
 }
 
+.priorityCorner {
+    border-bottom-left-radius: 0px;
+}
+
+.shown {
+    display: flex;
+    justify-content: space-between;
+}
+
+.deleteIcon {
+    padding-right: 30px;
+}
+
 .description {
     padding: 12px;
 }
