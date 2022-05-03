@@ -23,10 +23,15 @@ const DOMCreateSidebar = ((allProjects) => {
 
     sidebar.appendChild(projectsContainer)
 
+    const newProjectSuperContainer = document.createElement('div')
+    newProjectSuperContainer.classList.add('newProjectSuperContainer')
+
     const newProject = document.createElement('button')
     newProject.classList.add('newProject')
     newProject.textContent = 'Add New Project'
-    sidebar.appendChild(newProject)
+    newProjectSuperContainer.appendChild(newProject)
+
+    sidebar.appendChild(newProjectSuperContainer)
 
     document.querySelector('#content').prepend(sidebar)
 })

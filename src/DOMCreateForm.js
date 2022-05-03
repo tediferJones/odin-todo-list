@@ -18,9 +18,7 @@ const DOMCreateForm = ((allProjects) => {
                 titleInput.setAttribute('type', 'text')
                 titleInput.setAttribute('id', 'title')
                 titleInput.setAttribute('name', 'title')
-
-                // REMOVE ME
-                titleInput.setAttribute('value', 'sometitle')
+                titleInput.setAttribute('placeholder', 'Required')
 
             titleInputContainer.appendChild(titleInput)
 
@@ -39,9 +37,6 @@ const DOMCreateForm = ((allProjects) => {
                 descriptionInput.setAttribute('type', 'text')
                 descriptionInput.setAttribute('id', 'description')
                 descriptionInput.setAttribute('name', 'description')
-
-                // REMOVE ME
-                descriptionInput.setAttribute('value', 'someDescription')
 
             descriptionInputContainer.appendChild(descriptionInput)
 
@@ -80,9 +75,7 @@ const DOMCreateForm = ((allProjects) => {
                 priorityInput.setAttribute('name', 'priority')
                 priorityInput.setAttribute('max', '8')
                 priorityInput.setAttribute('min', '1')
-
-                // REMOVE ME
-                priorityInput.setAttribute('value', 1)
+                priorityInput.setAttribute('placeholder', '1 - 8')
 
             priorityInputContainer.appendChild(priorityInput)
 

@@ -91,6 +91,23 @@ body {
     gap: 12px;
 }
 
+.createNewTask {
+    height: 32px;
+    outline: none;
+    border: none;
+    background-color: purple;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.formError {
+    color: red;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+}
+
 .addTask {
     height: 64px;
     width: 256px;

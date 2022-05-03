@@ -18,9 +18,6 @@ const mainContent = document.createElement('div')
 mainContent.classList.add('mainContent')
 document.querySelector('#content').appendChild(mainContent)
 
-// allProjects['myToDos'].push(CreateToDoItem('Go to the store', 'Buy toilet paper', '2023-1-1T00:00:00', 1))
-// allProjects['myToDos'].push(CreateToDoItem('Ship a package', 'Go to USPS', 'the next day', 4))
-// allProjects['myToDos'].push(CreateToDoItem('Doctors appt.', 'Get an xray', 'the next next day', 8))
 DOMDisplayToDoItems(allProjects['myToDos'], allProjects)
 
 const addTask = document.createElement('button')
@@ -37,22 +34,28 @@ addTask.addEventListener('click', () => {
             createNewTask.classList.add('createNewTask')
             createNewTask.textContent = 'Create New Task'
             createNewTask.addEventListener('click', () => {
-                // still needs to have input sanitized, new DOMAppend call in if/else statement
-                // realistically only need to check that priority is between 1 and 8, if it is make item, else append error message
                 let title = document.querySelector('.formContainer').title.value
                 let description = document.querySelector('.formContainer').description.value
                 let dueDate = document.querySelector('.formContainer').dueDate.value
-                let priority = document.querySelector('.formContainer').priority.value
+                let priority = Math.floor(document.querySelector('.formContainer').priority.value)
                 let selectProject = document.querySelector('.formContainer').selectProject.value
                 dueDate = (new Date(dueDate)).toLocaleString()
 
-                // if all form data is appropiate, then do this stuff, otherwise, append an error message to formdiv
-                allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
-                localStorage.setItem('allToDos', JSON.stringify(allProjects))
-
-                DOMDisplayToDoItems(allProjects[selectProject], allProjects)
-                document.querySelector('form').reset()
-                document.querySelector('.inputForm').remove()
+                if (title.replace(/ /g, '').length > 0 && priority >= 1 && priority < 9) {
+                    allProjects[selectProject].push(CreateToDoItem(title, description, dueDate, priority))
+                    localStorage.setItem('allToDos', JSON.stringify(allProjects))
+ 
+                    DOMDisplayToDoItems(allProjects[selectProject], allProjects)
+                    document.querySelector('form').reset()
+                    document.querySelector('.inputForm').remove()
+                } else {
+                    if (!(document.querySelector('.formError'))) {
+                        const formError = document.createElement('div')
+                        formError.classList.add('formError')
+                        formError.textContent = 'A name and proper priority is required'
+                        document.querySelector('.inputForm').appendChild(formError)
+                    }
+                }
             })
             document.querySelector('.inputForm').appendChild(createNewTask)
         }
@@ -108,8 +111,52 @@ document.querySelector('.newProject').addEventListener('click', () => {
     }
 })
 
-// SANITIZE FORM INPUTS
-// [ DONE ] add button to each item that will remove it from the myToDos array and its project
-// [ DONE ] cleaner time stamp idea: subtract dueDate from CurrentDate, get number of milliseconds.
-// [ DONE ] then convert milliseconds to "X Days, Y Hours, and Z minutes"
-// [ DONE ] figure out way to "save" our data so this app can actually be useful!
+// REMOVE BTN TEST
+
+const removeProject = document.createElement('button')
+removeProject.classList.add('removeProject')
+removeProject.textContent = 'Remove a Project'
+removeProject.addEventListener('click', () => {
+    console.log('remove the project')
+
+    if (document.querySelector('.removeFormContainer')) {
+        document.querySelector('.removeFormContainer').remove()
+    } else {
+        const removeFormContainer = document.createElement('div')
+        removeFormContainer.classList.add('removeFormContainer')
+
+        const removeForm = document.createElement('form')
+        removeForm.classList.add('removeForm')
+
+        const removeLabel = document.createElement('label')
+        removeLabel.classList.add('removeLabel')
+        removeLabel.textContent = 'Remove which project?'
+        removeLabel.setAttribute('for', 'removeProject')
+        removeForm.appendChild(removeLabel)
+
+        const removeInput = document.createElement('select')
+        removeInput.setAttribute('id', 'removeProject')
+        removeInput.setAttribute('name', 'removeProject')
+        for (let key in allProjects) {
+            let projectRemoveSelection = document.createElement('option')
+            projectRemoveSelection.setAttribute('value', key)
+            projectRemoveSelection.textContent = key
+            removeInput.appendChild(projectRemoveSelection)
+        }
+        removeForm.appendChild(removeInput)
+        removeFormContainer.appendChild(removeForm)
+
+        const removeProjectBtn = document.createElement('button')
+        removeProjectBtn.classList.add('removeProjectBtn')
+        removeProjectBtn.textContent = 'Remove Project'
+        removeProjectBtn.addEventListener('click', () => {
+            console.log('REMOVE THE THING')
+            console.log(document.querySelector('.removeForm').removeProject.value)
+            delete allProjects[document.querySelector('.removeForm').removeProject.value]
+        })
+        removeFormContainer.appendChild(removeProjectBtn)
+
+        document.querySelector('.sidebar').appendChild(removeFormContainer)
+    }
+})
+document.querySelector('.sidebar').appendChild(removeProject)
